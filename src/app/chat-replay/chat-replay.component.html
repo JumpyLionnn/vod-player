@@ -1,0 +1,8 @@
+<div id="chat">
+    <h2>Chat Replay</h2>
+    <div id="messages">
+        <ng-template ngFor let-comment [ngForOf]="data?.messages" let-i="index">
+            <app-message [message]="comment" *ngIf="comment.content_offset_seconds < currentTime"></app-message>
+        </ng-template>
+    </div>
+</div>

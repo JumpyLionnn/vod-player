@@ -1,1 +1,1 @@
-<video [src]="src" playsinline controls></video>
+<video #video (timeupdate)="timeChangedEvent.emit(video.currentTime)" [src]="src" playsinline controls></video>

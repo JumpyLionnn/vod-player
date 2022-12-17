@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
     selector: 'app-video-player',
@@ -9,6 +9,9 @@ export class VideoPlayerComponent implements OnInit {
 
     @Input()
     public src: string = "";
+
+    @Output("time")
+    public timeChangedEvent: EventEmitter<number> = new EventEmitter();
 
     constructor() { }
 

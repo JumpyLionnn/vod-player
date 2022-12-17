@@ -1,0 +1,11 @@
+
+#chat{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#messages{
+    overflow-y: auto;
+    flex-grow: 1;
+}

@@ -1,1 +1,4 @@
-<app-video-player [src]="videoSource"></app-video-player>
+<div id="main">
+  <app-video-player id="video" [src]="videoSource" (time)="chatReplay.currentTime = $event"></app-video-player>
+  <app-chat-replay id="chat" #chatReplay [data]="messageData"></app-chat-replay>
+</div>

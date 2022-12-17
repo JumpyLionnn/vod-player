@@ -4,6 +4,8 @@ import { Route, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { VideoPlayerComponent } from './video-player/video-player.component';
+import { ChatReplayComponent } from './chat-replay/chat-replay.component';
+import { MessageComponent } from './chat-replay/message/message.component';
 
 const routes: Route[] = [
 	{
@@ -16,7 +18,9 @@ const routes: Route[] = [
 @NgModule({
 	declarations: [
 		AppComponent,
-		VideoPlayerComponent
+		VideoPlayerComponent,
+  ChatReplayComponent,
+  MessageComponent
 	],
 	imports: [
 		BrowserModule,
