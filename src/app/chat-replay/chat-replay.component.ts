@@ -13,6 +13,8 @@ export class ChatReplayComponent implements OnInit {
 
     public currentTime: number = 0;
 
+    public showScrollDownButton: boolean = false;
+
     constructor() { }
 
     ngOnInit(): void {

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { VideoPlayerComponent } from './video-player/video-player.component';
 import { ChatReplayComponent } from './chat-replay/chat-replay.component';
 import { MessageComponent } from './chat-replay/message/message.component';
+import { AutoscrollDirective } from './autoscroll.directive';
 
 const routes: Route[] = [
 	{
@@ -20,7 +21,8 @@ const routes: Route[] = [
 		AppComponent,
 		VideoPlayerComponent,
   ChatReplayComponent,
-  MessageComponent
+  MessageComponent,
+  AutoscrollDirective
 	],
 	imports: [
 		BrowserModule,

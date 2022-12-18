@@ -1,11 +1,30 @@
 
-#chat{
+#chat-panel{
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 
+h2{
+    color: var(--text-color);
+    text-align: center;
+}
+
+#chat{
+    position: relative;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
 #messages{
     overflow-y: auto;
-    flex-grow: 1;
+    overflow-x: hidden;
+    height: 100%;
+    padding: 0 0.6em;
+}
+
+#scrolldown-button{
+    position: absolute;
+    bottom: 2em;
+    right: 2em;
 }

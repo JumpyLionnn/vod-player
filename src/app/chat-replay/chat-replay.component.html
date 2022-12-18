@@ -1,8 +1,12 @@
-<div id="chat">
+<div id="chat-panel">
     <h2>Chat Replay</h2>
-    <div id="messages">
-        <ng-template ngFor let-comment [ngForOf]="data?.messages" let-i="index">
-            <app-message [message]="comment" *ngIf="comment.content_offset_seconds < currentTime"></app-message>
-        </ng-template>
+    <div id="chat">
+        <div id="messages" appAutoscroll (scroll-reached)="showScrollDownButton = $event" #autoscroll="appAutoscroll">
+            <ng-template ngFor let-comment [ngForOf]="data?.messages" let-i="index">
+                <app-message [message]="comment" *ngIf="comment.content_offset_seconds < currentTime"></app-message>
+            </ng-template>
+            
+        </div>
+        <button #scroll id="scrolldown-button" [ngStyle]="{'display': (showScrollDownButton ? 'block' : 'none')}" (click)="autoscroll.scrollDown()">Scroll Down</button>
     </div>
 </div>
