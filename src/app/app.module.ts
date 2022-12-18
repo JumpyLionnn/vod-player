@@ -8,6 +8,9 @@ import { ChatReplayComponent } from './chat-replay/chat-replay.component';
 import { MessageComponent } from './chat-replay/message/message.component';
 import { AutoscrollDirective } from './autoscroll.directive';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+
 const routes: Route[] = [
 	{
 		path: "",
@@ -20,13 +23,15 @@ const routes: Route[] = [
 	declarations: [
 		AppComponent,
 		VideoPlayerComponent,
-  ChatReplayComponent,
-  MessageComponent,
-  AutoscrollDirective
+		ChatReplayComponent,
+		MessageComponent,
+		AutoscrollDirective
 	],
 	imports: [
 		BrowserModule,
-		RouterModule.forRoot(routes)
+		RouterModule.forRoot(routes),
+		BrowserAnimationsModule,
+		MatIconModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

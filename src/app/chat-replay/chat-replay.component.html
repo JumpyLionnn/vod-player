@@ -7,6 +7,10 @@
             </ng-template>
             
         </div>
-        <button #scroll id="scrolldown-button" [ngStyle]="{'display': (showScrollDownButton ? 'block' : 'none')}" (click)="autoscroll.scrollDown()">Scroll Down</button>
+        <button #scroll id="scrolldown-button" *ngIf="showScrollDownButton" (click)="autoscroll.scrollDown()">
+            <mat-icon>arrow_downward</mat-icon>
+            <span>See new messages</span>
+            <span></span><!--spacing span-->
+        </button>
     </div>
 </div>
