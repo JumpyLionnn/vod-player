@@ -10,6 +10,9 @@ import { AutoscrollDirective } from './autoscroll.directive';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+import { NgScrollbarReachedModule } from 'ngx-scrollbar/reached-event';
+
 
 const routes: Route[] = [
 	{
@@ -31,7 +34,9 @@ const routes: Route[] = [
 		BrowserModule,
 		RouterModule.forRoot(routes),
 		BrowserAnimationsModule,
-		MatIconModule
+		MatIconModule,
+		NgScrollbarModule,
+		NgScrollbarReachedModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

@@ -1,16 +1,17 @@
 <div id="chat-panel">
     <h2>Chat Replay</h2>
     <div id="chat">
-        <div id="messages" appAutoscroll (scroll-reached)="showScrollDownButton = $event" #autoscroll="appAutoscroll">
-            <ng-template ngFor let-comment [ngForOf]="data?.messages" let-i="index">
-                <app-message [message]="comment" *ngIf="comment.content_offset_seconds < currentTime"></app-message>
-            </ng-template>
-            
-        </div>
-        <button #scroll id="scrolldown-button" *ngIf="showScrollDownButton" (click)="autoscroll.scrollDown()">
+        <ng-scrollbar id="messages" [autoHeightDisabled]="false"  (reachedBottom)="onBottomReached($event)" [reachedOffset]="200">
+            <div #messagescontainer>
+                <ng-template ngFor let-comment [ngForOf]="data?.messages" let-i="index">
+                    <app-message [message]="comment" *ngIf="comment.content_offset_seconds < currentTime"></app-message>
+                </ng-template>
+            </div>
+        </ng-scrollbar>
+        <button #scroll id="scrolldown-button" *ngIf="showScrollDownButton" (click)="scrollDown()">
             <mat-icon>arrow_downward</mat-icon>
             <span>See new messages</span>
-            <span></span><!--spacing span-->
+            <span></span>
         </button>
     </div>
 </div>
