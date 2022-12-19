@@ -10,6 +10,7 @@ import { MessageComponent } from './chat-replay/message/message.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { BadgeComponent } from './chat-replay/badge/badge.component';
 
 
 const routes: Route[] = [
@@ -25,7 +26,8 @@ const routes: Route[] = [
 		AppComponent,
 		VideoPlayerComponent,
 		ChatReplayComponent,
-		MessageComponent
+		MessageComponent,
+  BadgeComponent
 	],
 	imports: [
 		BrowserModule,

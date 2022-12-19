@@ -3,7 +3,7 @@
     <div id="chat">
         <ng-scrollbar id="messages-scrollable-container" [autoHeightDisabled]="false">
             <div #messagescontainer id="messages">
-                <ng-template ngFor let-comment [ngForOf]="data?.messages" let-i="index">
+                <ng-template ngFor let-comment [ngForOf]="messages" let-i="index">
                     <app-message [message]="comment" *ngIf="comment.content_offset_seconds < currentTime"></app-message>
                 </ng-template>
             </div>

@@ -44,8 +44,9 @@ export interface Message {
     updated_at: string;
 }
 
-export interface Data{
-    user_id: number;
+export interface Broadcast{
+    videoUrl: string;
+    userId: number;
     username: string;
     messages: Message[];
 };

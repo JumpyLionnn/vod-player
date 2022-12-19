@@ -1,7 +1,7 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgScrollbar } from 'ngx-scrollbar';
-import { Data } from "./messages.model";
+import { Message } from "../broadcast.model";
 
 @Component({
     selector: 'app-chat-replay',
@@ -11,7 +11,7 @@ import { Data } from "./messages.model";
 export class ChatReplayComponent implements OnInit {
 
     @Input()
-    public data?: Data;
+    public messages?: Message[];
 
     public currentTime: number = 0;
 

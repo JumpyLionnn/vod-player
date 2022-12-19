@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Data } from './chat-replay/messages.model';
+import { Broadcast } from './broadcast.model';
+import { DataLoaderService } from './data-loader.service';
 
 @Component({
     selector: 'app-root',
@@ -9,37 +10,11 @@ import { Data } from './chat-replay/messages.model';
 })
 export class AppComponent {
     
-    public videoSource: string = "";
-    public messageData?: Data;
+    public broadcastData?: Broadcast;
 
-    constructor(private route: ActivatedRoute) {
-         //TODO: handle null
-        route.queryParams.subscribe((params) => {
-            if(params["mp4"]){
-                this.videoSource = params["mp4"];
-            }
-            if(params["json"]){
-                fetch(params["json"])
-                    .then((response) => response.json())
-                    .then((data: any) => {
-                        this.messageData = {
-                            messages: data.comments,
-                            user_id: 0,
-                            username: ""
-                        };
-
-                        if(data["streamer"]){
-                            // new format
-                            this.messageData.user_id = data["streamer"].id;
-                            this.messageData.username = data["streamer"].name;
-                        }
-                        else if(data["video"]){
-                            // old format
-                            this.messageData.user_id = data["video"].user_id;
-                            this.messageData.username = data["video"].user_name;
-                        }
-                    });
-            }
-        });
+    constructor(private loader: DataLoaderService) {
+         loader.onLoad.subscribe((data) => {
+            this.broadcastData = data;
+         });
     }
 }
