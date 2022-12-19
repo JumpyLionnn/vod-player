@@ -1,3 +1,4 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { Data } from "./messages.model";
@@ -23,29 +24,33 @@ export class ChatReplayComponent implements OnInit {
     @ViewChild("messagescontainer")
     public messagesContainer!: ElementRef<HTMLDivElement>;
 
-
     public scrollTreshold: number = 200;
 
-
-    constructor() { }
+    constructor(private changeDetector: ChangeDetectorRef) { }
 
     ngOnInit(): void {
     }
 
     public ngAfterViewInit() {
         this.scrollbarRef.scrolled.subscribe((e) => this.onScroll(e));
-        console.log(this.scrollbarRef.nativeElement);
     }
 
     public updateVideoTime(time: number){
+        console.log("update");
         this.currentTime = time;
-        if(this.lastHeight != this.messagesContainer.nativeElement.scrollHeight){
-            this.lastHeight = this.messagesContainer.nativeElement.scrollHeight;
-            if(!this.showScrollDownButton){
+        if(!this.showScrollDownButton){
+            this.changeDetector.detectChanges();
+            this.scrollbarRef.update();
+            if(this.lastHeight != this.messagesContainer.nativeElement.scrollHeight){
+                this.lastHeight = this.messagesContainer.nativeElement.scrollHeight;
                 this.scrollbarRef.scrollTo({duration: 0, bottom: 0});
+                this.changeDetector.detectChanges();
+                this.scrollbarRef.update();
             }
         }
+        
     }
+
 
     public scrollDown(){
         this.scrollbarRef.scrollTo({bottom: 0});
@@ -60,10 +65,5 @@ export class ChatReplayComponent implements OnInit {
         else{
             this.showScrollDownButton = false;
         }
-    }
-
-    onBottomReached(event: Event){
-        console.log("bottom reached");
-        console.log(event);
     }
 }

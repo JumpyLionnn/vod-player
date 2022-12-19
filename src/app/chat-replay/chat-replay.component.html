@@ -1,8 +1,8 @@
 <div id="chat-panel">
     <h2>Chat Replay</h2>
     <div id="chat">
-        <ng-scrollbar id="messages" [autoHeightDisabled]="false"  (reachedBottom)="onBottomReached($event)" [reachedOffset]="200">
-            <div #messagescontainer>
+        <ng-scrollbar id="messages-scrollable-container" [autoHeightDisabled]="false">
+            <div #messagescontainer id="messages">
                 <ng-template ngFor let-comment [ngForOf]="data?.messages" let-i="index">
                     <app-message [message]="comment" *ngIf="comment.content_offset_seconds < currentTime"></app-message>
                 </ng-template>

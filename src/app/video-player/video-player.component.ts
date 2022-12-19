@@ -10,13 +10,11 @@ export class VideoPlayerComponent implements OnInit {
     @Input()
     public src: string = "";
 
-    @Output("time")
+    @Output("timeupdate")
     public timeChangedEvent: EventEmitter<number> = new EventEmitter();
 
     constructor() { }
 
-    ngOnInit(): void {
-        console.log(this.src);
-    }
+    ngOnInit(): void {}
 
 }
