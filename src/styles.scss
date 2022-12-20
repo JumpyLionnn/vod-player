@@ -25,7 +25,7 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-
+// tooltips
 .mat-tooltip {
     pointer-events: none;
 
@@ -84,4 +84,9 @@ body {
             transform: rotate(90deg);
         }
     }
+}
+
+// video player
+vg-scrub-bar .scrubBar{
+    background-color: #50534e;
 }

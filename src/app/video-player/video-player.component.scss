@@ -14,3 +14,8 @@ video{
     font-weight: 900;
     margin: 0 0.1em;
 }
+
+.filler{
+    flex-grow: 1;
+    flex-basis: 0;
+}
