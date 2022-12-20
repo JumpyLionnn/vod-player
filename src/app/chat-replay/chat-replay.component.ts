@@ -11,7 +11,7 @@ import { Message } from "../broadcast.model";
 export class ChatReplayComponent implements OnInit {
 
     @Input()
-    public messages?: Message[];
+    public messages: Message[] = [];
 
     public currentTime: number = 0;
 
@@ -36,7 +36,6 @@ export class ChatReplayComponent implements OnInit {
     }
 
     public updateVideoTime(time: number){
-        console.log("update");
         this.currentTime = time;
         if(!this.showScrollDownButton){
             this.changeDetector.detectChanges();

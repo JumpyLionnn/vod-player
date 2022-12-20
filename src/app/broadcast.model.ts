@@ -25,10 +25,10 @@ export interface Message {
         }[]
         fragments: {
             text: string;
-            emoticon?: {
+            emoticon: {
                 emoticon_id: string;
                 emoticon_set_id: string;
-            }
+            } | null;
         }[];
         is_action: boolean;
         user_badges?: {

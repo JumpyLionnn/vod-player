@@ -5,5 +5,12 @@
         </span>
         <span id="username" [ngStyle]="{'color':message.message.user_color}">{{message.commenter.display_name}}</span>: 
     </span>
-    {{message.message.body}}
+    <ng-template ngFor let-fragment [ngForOf]="contentFragments" let-i="index">
+        <ng-container [ngSwitch]="fragment.type">
+            <span *ngSwitchCase="FragmentTypeEnum.Text" class="fragment">
+                {{$any(fragment).text}}
+            </span>
+            <img *ngSwitchCase="FragmentTypeEnum.Emote" [src]="'https://static-cdn.jtvnw.net/emoticons/v1/' + $any(fragment).id + '/1.0'" class="fragment emote">
+        </ng-container>
+    </ng-template>
 </div>

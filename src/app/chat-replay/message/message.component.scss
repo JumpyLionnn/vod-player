@@ -1,4 +1,14 @@
 #message{
     color: var(--text-color);
     word-break: break-word;
+    margin: 0.5em 0;
+}
+
+.fragment{
+    word-break: break-word;
+}
+
+.emote{
+    position: relative;
+    vertical-align: middle;
 }
