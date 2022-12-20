@@ -83,7 +83,7 @@ export class MessageComponent implements OnInit, OnChanges {
                 if(lastIndex < fragment.text.length){
                     this.contentFragments.push({
                         type: FragmentType.Text,
-                        text: fragment.text
+                        text: fragment.text.slice(lastIndex)
                     });
                 }
                 
