@@ -16,6 +16,7 @@ export class DataLoaderService {
     constructor(private route: ActivatedRoute) {
         //TODO: handle null
         this.broadcastData = {
+            title: "Untitled stream.",
             videoUrl: "",
             messages: [],
             userId: 0,
@@ -38,9 +39,15 @@ export class DataLoaderService {
                         }
                         else if (data["video"]) {
                             // old format
+                            this.broadcastData.title = data["video"].title;
                             this.broadcastData.userId = data["video"].user_id;
                             this.broadcastData.username = data["video"].user_name;
                         }
+
+                        if(data["title"]){ // custom data
+                            this.broadcastData.title = data["title"];
+                        }
+                        // TODO: maybe add profile picture to the header, if possible
 
                         this.onLoad.emit(this.broadcastData);
                         this.isLoaded = true;

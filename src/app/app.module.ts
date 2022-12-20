@@ -18,6 +18,7 @@ import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
 import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 import { VgStreamingModule } from '@videogular/ngx-videogular/streaming';
 import { PictureInPictureComponent } from './video-player/picture-in-picture/picture-in-picture.component';
+import { HeaderComponent } from './header/header.component';
 
 
 const routes: Route[] = [
@@ -35,7 +36,8 @@ const routes: Route[] = [
 		ChatReplayComponent,
 		MessageComponent,
 		BadgeComponent,
-  PictureInPictureComponent
+		PictureInPictureComponent,
+		HeaderComponent
 	],
 	imports: [
 		BrowserModule,
