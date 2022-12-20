@@ -87,6 +87,38 @@ body {
 }
 
 // video player
-vg-scrub-bar .scrubBar{
-    background-color: #50534e;
+vg-player {
+    vg-scrub-bar {
+        
+        .scrubBar{
+            background-color: #50534e;
+        }
+
+        &:not(.hide):hover{
+            transition: height 0.2s ease-in;
+        }
+
+        &:hover{
+            
+            height: 12px;
+        }
+
+        vg-scrub-bar-current-time, vg-scrub-bar-buffering-time{
+            height: 100%;
+        }
+    }
+}
+
+vg-buffering .vg-buffering .bufferingContainer{
+    cursor: default;
+}
+
+.vg-overlay-play{
+    cursor: default!important;
+
+    .vg-icon-play_arrow::before{
+        z-index: 201;
+        cursor: pointer!important;
+        pointer-events: all;
+    }
 }
