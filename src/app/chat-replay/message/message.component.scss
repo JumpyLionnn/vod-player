@@ -4,7 +4,7 @@
     margin: 0.5em 0;
 }
 
-.fragment{
+#contents{
     word-break: break-word;
 }
 
@@ -17,4 +17,8 @@
     //color: #5c16c5; for the future for light mode theme
     color: #bf94ff;
     text-decoration: none;
+}
+
+.italic{
+    font-style: italic;
 }
