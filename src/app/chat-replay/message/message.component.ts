@@ -3,13 +3,18 @@ import { Message } from '../../broadcast.model';
 
 enum FragmentType{
     Text,
-    Emote
-    // TODO: add link parsing
+    Emote,
+    Link
 }
 
 interface TextFragment{
     type: FragmentType.Text;
     text: string;
+}
+
+interface LinkFragment{
+    type: FragmentType.Link;
+    url: string;
 }
 
 interface EmoteFragment{
@@ -19,7 +24,9 @@ interface EmoteFragment{
     name: string;
 }
 
-type Fragment = TextFragment | EmoteFragment;
+type Fragment = TextFragment | EmoteFragment | LinkFragment;
+
+const urlRegex = /(?<=\s|^)((https?:)?\/\/)?(www\.)?[-a-zA-Z0-9:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)(?=\s|$)/g;
 
 @Component({
     selector: 'app-message',
@@ -37,9 +44,7 @@ export class MessageComponent implements OnInit, OnChanges {
 
     constructor() {}
 
-    ngOnInit(): void {
-        this.parse();
-    }
+    ngOnInit(): void {}
 
     ngOnChanges(){
         this.parse();
@@ -48,20 +53,40 @@ export class MessageComponent implements OnInit, OnChanges {
 
     private parse(){
         this.contentFragments = [];
-        for(const frament of this.message.message.fragments){
-            if(frament.emoticon !== null){
+        for(const fragment of this.message.message.fragments){
+            if(fragment.emoticon !== null){
                 this.contentFragments.push({
                     type: FragmentType.Emote,
-                    id: frament.emoticon?.emoticon_id,
-                    set_id: frament.emoticon?.emoticon_set_id,
-                    name: frament.text
+                    id: fragment.emoticon?.emoticon_id,
+                    set_id: fragment.emoticon?.emoticon_set_id,
+                    name: fragment.text
                 });
             }
             else{
-                this.contentFragments.push({
-                    type: FragmentType.Text,
-                    text: frament.text
-                });
+                const matches = fragment.text.matchAll(urlRegex);
+                let lastIndex = 0;
+                for(const match of matches){
+                    const length = match[0].length;
+                    const index = match.index ?? 0;
+                    if(index !== lastIndex){
+                        this.contentFragments.push({
+                            type: FragmentType.Text,
+                            text: fragment.text.slice(lastIndex, match.index)
+                        });
+                    }
+                    lastIndex = index + length;
+                    this.contentFragments.push({
+                        type: FragmentType.Link,
+                        url: fragment.text.slice(match.index, lastIndex)
+                    });
+                }
+                if(lastIndex < fragment.text.length){
+                    this.contentFragments.push({
+                        type: FragmentType.Text,
+                        text: fragment.text
+                    });
+                }
+                
             }
         }
     }

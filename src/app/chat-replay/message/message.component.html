@@ -10,6 +10,7 @@
             <span *ngSwitchCase="FragmentTypeEnum.Text" class="fragment">
                 {{$any(fragment).text}}
             </span>
+            <a *ngSwitchCase="FragmentTypeEnum.Link" [href]="$any(fragment).url" target="_blank" class="fragment link">{{$any(fragment).url}}</a>
             <img
                 *ngSwitchCase="FragmentTypeEnum.Emote" 
                 [src]="'https://static-cdn.jtvnw.net/emoticons/v1/' + $any(fragment).id + '/1.0'" 
