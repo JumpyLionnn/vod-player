@@ -6,11 +6,12 @@ import { AppComponent } from './app.component';
 import { VideoPlayerComponent } from './video-player/video-player.component';
 import { ChatReplayComponent } from './chat-replay/chat-replay.component';
 import { MessageComponent } from './chat-replay/message/message.component';
+import { BadgeComponent } from './chat-replay/badge/badge.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { BadgeComponent } from './chat-replay/badge/badge.component';
 
 
 const routes: Route[] = [
@@ -27,13 +28,16 @@ const routes: Route[] = [
 		VideoPlayerComponent,
 		ChatReplayComponent,
 		MessageComponent,
-  BadgeComponent
+		BadgeComponent
 	],
 	imports: [
 		BrowserModule,
 		RouterModule.forRoot(routes),
 		BrowserAnimationsModule,
+		
 		MatIconModule,
+		MatTooltipModule,
+
 		NgScrollbarModule
 	],
 	providers: [],

@@ -10,7 +10,15 @@
             <span *ngSwitchCase="FragmentTypeEnum.Text" class="fragment">
                 {{$any(fragment).text}}
             </span>
-            <img *ngSwitchCase="FragmentTypeEnum.Emote" [src]="'https://static-cdn.jtvnw.net/emoticons/v1/' + $any(fragment).id + '/1.0'" class="fragment emote">
+            <img
+                *ngSwitchCase="FragmentTypeEnum.Emote" 
+                [src]="'https://static-cdn.jtvnw.net/emoticons/v1/' + $any(fragment).id + '/1.0'" 
+                class="fragment emote"
+                [matTooltip]="$any(fragment).name ?? ''"
+                [matTooltipShowDelay]="100"
+                matTooltipClass="mat-tooltip above"
+                matTooltipPosition="above"
+                >
         </ng-container>
     </ng-template>
 </div>

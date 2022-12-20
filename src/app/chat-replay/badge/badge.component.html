@@ -1,1 +1,12 @@
-<img id="badge-img" [src]="badge?.image_url_1x" alt="">
+<a [href]="url" [ngClass]="{'disabled': url === null}" target="_blank">
+    <img 
+    [matTooltip]="badge?.title ?? ''"
+    [matTooltipShowDelay]="100"
+    [matTooltipDisabled]="badge === null"
+    matTooltipClass="mat-tooltip above"
+    matTooltipPosition="above"
+    id="badge-img" 
+    [src]="badge?.image_url_1x" 
+    [alt]="badge?.title ?? ''"
+    >
+</a>
