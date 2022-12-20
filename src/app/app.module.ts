@@ -12,6 +12,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { VgCoreModule } from '@videogular/ngx-videogular/core';
+import { VgControlsModule } from '@videogular/ngx-videogular/controls';
+import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
+import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
+import { VgStreamingModule } from '@videogular/ngx-videogular/streaming';
+import { PictureInPictureComponent } from './video-player/picture-in-picture/picture-in-picture.component';
 
 
 const routes: Route[] = [
@@ -28,17 +34,23 @@ const routes: Route[] = [
 		VideoPlayerComponent,
 		ChatReplayComponent,
 		MessageComponent,
-		BadgeComponent
+		BadgeComponent,
+  PictureInPictureComponent
 	],
 	imports: [
 		BrowserModule,
 		RouterModule.forRoot(routes),
 		BrowserAnimationsModule,
-		
+
 		MatIconModule,
 		MatTooltipModule,
 
-		NgScrollbarModule
+		NgScrollbarModule,
+		VgCoreModule,
+		VgControlsModule,
+		VgOverlayPlayModule,
+		VgBufferingModule,
+		VgStreamingModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
