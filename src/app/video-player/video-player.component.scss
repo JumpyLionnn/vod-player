@@ -19,3 +19,9 @@ video{
     flex-grow: 1;
     flex-basis: 0;
 }
+
+@media (max-aspect-ratio: 10 / 15){
+    .mobile-hidden{
+        display: none;
+    }
+}

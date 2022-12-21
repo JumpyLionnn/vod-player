@@ -1,5 +1,4 @@
-import { ChangeDetectorRef } from '@angular/core';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { Message } from "../broadcast.model";
 
@@ -26,7 +25,7 @@ export class ChatReplayComponent implements OnInit {
 
     public scrollTreshold: number = 200;
 
-    constructor(private changeDetector: ChangeDetectorRef) { }
+    constructor(private changeDetector: ChangeDetectorRef) {}
 
     ngOnInit(): void {
     }

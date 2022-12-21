@@ -1,12 +1,33 @@
 #main{
-    display: flex;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: auto 1fr;
     height: 100%;
+    grid-template-areas: 
+        "header chat-replay"
+        "video chat-replay";
 }
 
-#body{
-    width: 75%;
+@media (max-aspect-ratio: 1 / 1){
+    #main{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr 3fr;
+        grid-template-areas: 
+        "header"
+        "video"
+        "chat-replay";
+    }
+}
+
+#header{
+    grid-area: header;
+}
+
+#video{
+    grid-area: video;
 }
 
 #chat{
-    width: 25%;
+    grid-area: chat-replay;
+    overflow: hidden;
 }
