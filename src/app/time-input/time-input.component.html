@@ -1,0 +1,7 @@
+<div id="time-input" class="time-input" [ngClass]="{'disabled': disabled, 'focus': hoursInput.isFocused() || minutesInput.isFocused() || secondsInput.isFocused()}">
+    <app-fixed-number-input #hoursInput [max]="Math.floor(max / 3600)" [value]="hours" [disabled]="disabled" (input)="onHoursUpdated($event)" (end)="minutesInput.focusStart()" [input-class]="'input'" (moveright)="minutesInput.focusStart()"></app-fixed-number-input>
+    <span *ngIf="allowHours">:</span>
+    <app-fixed-number-input #minutesInput [max]="60" [value]="minutes" [disabled]="disabled" (input)="onMinutesUpdated($event)" (end)="secondsInput.focusStart()" (outofbounds)="hoursInput.focusEnd(1);hoursInput.write($event)" [input-class]="'input'"  (moveright)="secondsInput.focusStart()" (moveleft)="hoursInput.focusEnd()"></app-fixed-number-input>
+    <span *ngIf="allowMinutes">:</span>
+    <app-fixed-number-input #secondsInput [max]="60" [value]="seconds" [disabled]="disabled"  (input)="onSecondsUpdated($event)" (outofbounds)="minutesInput.focusEnd(1);minutesInput.write($event)" [input-class]="'input'" (moveleft)="minutesInput.focusEnd()"></app-fixed-number-input>
+</div>

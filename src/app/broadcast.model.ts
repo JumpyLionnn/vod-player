@@ -45,8 +45,9 @@ export interface Message {
 }
 
 export interface Broadcast{
-    title: string;
+    title: string | null;
     videoUrl: string;
+    startTime: number;
     userId: number;
     username: string;
     messages: Message[];

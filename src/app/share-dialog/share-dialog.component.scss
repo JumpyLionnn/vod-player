@@ -1,0 +1,56 @@
+:host, #dialog{
+    max-width: 470px;
+}
+
+#dialog-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+
+    &::before{
+        display: none;
+    }
+
+    h2{
+        margin: 0 0 0 1em;
+    }
+}
+
+#share-buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+#url{
+    display: flex;
+    align-items: center;
+    border: 2px #e1e1e1 solid;
+    border-radius: 10px;
+    padding: 0.5em;
+    background-color: #f9f9f9;
+
+    #url-content{
+        flex-grow: 1;
+        text-overflow: ellipsis;
+        white-space: pre;
+        overflow: hidden;
+        color: --text-color;
+    }
+
+    #copy-button{
+        border-radius: 1000000px;
+    }
+}
+
+.divider{
+    margin: 1em 0 0.8em 0;
+}
+
+#time{
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+}

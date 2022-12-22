@@ -1,0 +1,31 @@
+#time-input{
+    border: 0;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    display: flex;
+
+    &.disabled{
+        border-bottom: 0;
+        color: #606060;
+    }
+
+    &.focus{
+        border-width: 2px;
+    }
+}
+
+::ng-deep{
+    .input{
+        border-color: transparent;
+        background-color: transparent;
+    
+        &:focus{
+            outline: none;
+        }
+
+        &:disabled{
+            color: #606060;
+        }
+    
+    }
+}

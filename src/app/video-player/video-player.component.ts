@@ -16,6 +16,9 @@ export class VideoPlayerComponent implements OnInit {
     @Output("timeupdate")
     public timeChangedEvent: EventEmitter<number> = new EventEmitter();
 
+    @Output("duration")
+    public durationEvent: EventEmitter<number> = new EventEmitter();
+
     @ViewChild("media", { static: true })
     public videoElement!: ElementRef<HTMLVideoElement>;
 
@@ -28,18 +31,39 @@ export class VideoPlayerComponent implements OnInit {
         document.addEventListener("keydown", (e) => this.onKeyDown(e));
     }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        
+    }
 
     onPlayerReady(e: VgApiService) {
         this.videoApi = e;
     }
 
-    public updateTime(){
+    public seekTo(time: number){
+        if(this.videoApi.isMetadataLoaded){
+            this.videoApi.seekTime(time);
+            this.videoApi.play();
+        }
+        else{
+            const callback = () => {
+                this.videoApi.seekTime(time);
+                this.videoApi.play();
+                this.videoElement.nativeElement.removeEventListener("loadedmetadata", callback);
+            };
+            this.videoElement.nativeElement.addEventListener("loadedmetadata", callback)
+        }
+    }
+
+    protected updateTime(){
         this.timeChangedEvent.emit(this.videoElement.nativeElement.currentTime);
     }
 
+    protected onLoadedMetaData(){
+        this.durationEvent.emit(this.videoElement.nativeElement.duration);
+    }
 
-    public onKeyDown(event: KeyboardEvent) {
+
+    protected onKeyDown(event: KeyboardEvent) {
         switch (event.code) {
             case "Space":
             case "KeyK":

@@ -1,0 +1,25 @@
+<div id="dialog">
+    <div mat-dialog-title id="dialog-title">
+        <h2>Share</h2>
+        <button mat-icon-button aria-label="close dialog" mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div mat-dialog-content>
+        <div id="share-buttons">
+            <share-button *ngFor="let platform of platforms" [button]="platform" theme="circles-dark" [title]="data.title ?? ''" [description]="shareDescription"></share-button>
+        </div>
+        <div id="url">
+            <span id="url-content">{{url}}</span>
+            <button id="copy-button" mat-raised-button color="primary" (click)="onCopy()">Copy</button>
+        </div>
+        <mat-divider class="divider"></mat-divider>
+        <div id="time">
+            <mat-checkbox #timeCheckbox [(ngModel)]="timeEnabled" class="example-margin" (change)="updateUrl()">Start
+                at</mat-checkbox>
+            <app-time-input #timeInput [disabled]="!timeCheckbox.checked" [max]="data.duration"
+                (change)="onTimeChange($event)"></app-time-input>
+        </div>
+
+    </div>
+</div>

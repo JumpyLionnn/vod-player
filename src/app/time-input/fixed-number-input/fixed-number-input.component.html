@@ -1,0 +1,12 @@
+<input 
+    #input 
+    type="text" 
+    (keydown)="onKeyDown($event)" 
+    (paste)="onPaste($event)" 
+    [ngStyle]="{'width.ch': digitCount}" 
+    [class]="class" 
+    (change)="onChange.emit()"
+    (focus)="_focus = true"
+    (blur)="_focus = false"
+    [disabled]="disabled"
+    >

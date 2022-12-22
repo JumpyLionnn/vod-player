@@ -8,6 +8,7 @@ import { Broadcast } from './broadcast.model';
 })
 export class DataLoaderService {
     public broadcastData: Broadcast;
+    public dataUrl: string = "";
 
     public onLoad: EventEmitter<Broadcast> = new EventEmitter();
 
@@ -16,8 +17,9 @@ export class DataLoaderService {
     constructor(private route: ActivatedRoute) {
         //TODO: handle null
         this.broadcastData = {
-            title: "Untitled stream.",
+            title: null,
             videoUrl: "",
+            startTime: 0,
             messages: [],
             userId: 0,
             username: ""
@@ -26,7 +28,11 @@ export class DataLoaderService {
             if (params["mp4"]) {
                 this.broadcastData.videoUrl = params["mp4"];
             }
+            if (params["t"]) {
+                this.broadcastData.startTime = parseInt(params["t"]);
+            }
             if (params["json"]) {
+                this.dataUrl = params["json"];
                 fetch(params["json"])
                     .then((response) => response.json())
                     .then((data: any) => {

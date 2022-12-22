@@ -27,6 +27,6 @@
         
     </vg-controls>
 
-    <video [vgMedia]="$any(media)" #media id="singleVideo" [src]="src"  preload="auto" crossorigin autoplay (timeupdate)="updateTime()">
+    <video [vgMedia]="$any(media)" #media id="singleVideo" [src]="src"  preload="auto" crossorigin autoplay (timeupdate)="updateTime()" (loadedmetadata)="onLoadedMetaData()">
     </video> 
 </vg-player>
