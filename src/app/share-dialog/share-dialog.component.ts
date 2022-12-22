@@ -41,10 +41,6 @@ export class ShareDialogComponent implements AfterViewInit {
         this.changeDetector.detectChanges();
     }
 
-    onNoClick(): void {
-        this.dialogRef.close();
-    }
-
     public onCopy() {
         this.clipboard.copy(this.url);
         this.snackBar.open("Link copied to clipboard", undefined, {

@@ -33,6 +33,7 @@ import { ShareButtonModule } from 'ngx-sharebuttons/button';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { TimeInputComponent } from './time-input/time-input.component';
 import { FixedNumberInputComponent } from './time-input/fixed-number-input/fixed-number-input.component';
+import { SettingsDialogComponent } from './settings/settings-dialog/settings-dialog.component';
 
 const routes: Route[] = [
 	{
@@ -53,7 +54,8 @@ const routes: Route[] = [
 		HeaderComponent,
 		ShareDialogComponent,
 		TimeInputComponent,
-		FixedNumberInputComponent
+		FixedNumberInputComponent,
+  SettingsDialogComponent
 	],
 	imports: [
 		BrowserModule,

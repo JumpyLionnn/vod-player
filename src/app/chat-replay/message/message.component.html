@@ -3,7 +3,7 @@
         <span id="badges">
             <app-badge *ngFor="let badgeInfo of message.message.user_badges" [id]="badgeInfo._id" [version]="badgeInfo.version"></app-badge>
         </span>
-        <span id="username" [ngClass]="{'italic': message.message.is_action}" [ngStyle]="{'color':message.message.user_color}">{{message.commenter.display_name}}</span>
+        <span id="username" [ngClass]="{'italic': message.message.is_action}" [ngStyle]="{'color':color.toString()}">{{message.commenter.display_name}}</span>
     </span>
     <span *ngIf="!message.message.is_action">:</span>
     <span>&nbsp;</span>

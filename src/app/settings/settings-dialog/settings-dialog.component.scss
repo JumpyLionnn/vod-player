@@ -1,0 +1,14 @@
+#dialog-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+
+    &::before{
+        display: none;
+    }
+
+    h2{
+        margin: 0 0 0 1em;
+    }
+}

@@ -31,9 +31,7 @@ export class VideoPlayerComponent implements OnInit {
         document.addEventListener("keydown", (e) => this.onKeyDown(e));
     }
 
-    ngOnInit(): void {
-        
-    }
+    ngOnInit(): void { }
 
     onPlayerReady(e: VgApiService) {
         this.videoApi = e;

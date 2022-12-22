@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataLoaderService } from '../data-loader.service';
 import { ShareDialogComponent, ShareDialogData } from '../share-dialog/share-dialog.component';
+import { SettingsDialogComponent } from '../settings/settings-dialog/settings-dialog.component';
 
 @Component({
     selector: 'app-header',
@@ -41,5 +42,9 @@ export class HeaderComponent {
                 title: this.loader.broadcastData.title
             },
         });
+    }
+
+    public openSettings(){
+        const dialogRef = this.dialog.open(SettingsDialogComponent);
     }
 }

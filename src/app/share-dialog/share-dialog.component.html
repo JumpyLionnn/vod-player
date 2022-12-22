@@ -15,8 +15,7 @@
         </div>
         <mat-divider class="divider"></mat-divider>
         <div id="time">
-            <mat-checkbox #timeCheckbox [(ngModel)]="timeEnabled" class="example-margin" (change)="updateUrl()">Start
-                at</mat-checkbox>
+            <mat-checkbox #timeCheckbox [(ngModel)]="timeEnabled" (change)="updateUrl()">Start at</mat-checkbox>
             <app-time-input #timeInput [disabled]="!timeCheckbox.checked" [max]="data.duration"
                 (change)="onTimeChange($event)"></app-time-input>
         </div>

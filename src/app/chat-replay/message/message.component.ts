@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { Message } from '../../broadcast.model';
+import { SettingsService } from '../../settings/settings.service';
+import Color from "color";
 
 enum FragmentType{
     Text,
@@ -38,18 +40,51 @@ export class MessageComponent implements OnInit, OnChanges {
     @Input()
     public message!: Message;
 
+    public color: Color = new Color([0, 0, 0], "rgb");
     public contentFragments: Fragment[] = [];
 
     public FragmentTypeEnum = FragmentType;
 
-    constructor() {}
+    constructor(private settings: SettingsService) {
+        this.settings.onReadableColorsChange.subscribe(this.changeReadableColors.bind(this));
+    }
 
-    ngOnInit(): void {}
+    ngOnInit(): void{
+        this.changeReadableColors(this.settings.getReadableColors());
+    }
 
     ngOnChanges(){
         this.parse();
     }
 
+    private changeReadableColors(value: boolean){
+        if(value){
+            const backgroundColor = new Color("black"); // make it dynamic with themes
+            const fontColor = new Color(this.message.message.user_color);
+
+            const contrastRatio = backgroundColor.contrast(fontColor);
+            const minContrastRatio = 4.5;
+            if(contrastRatio < minContrastRatio){
+                const backgroundLight = backgroundColor.lightness();
+                const contrastDiff = minContrastRatio - contrastRatio;
+                
+                const change = contrastDiff * 5;
+
+                if(backgroundLight > 50){
+                    this.color = fontColor.lightness(fontColor.lightness() - change);
+                }
+                else{
+                    this.color = fontColor.lightness(fontColor.lightness() + change);
+                }
+            }
+            else{
+                this.color = fontColor;
+            }
+        }
+        else{
+            this.color = new Color(this.message.message.user_color);
+        }
+    }
 
     private parse(){
         this.contentFragments = [];
@@ -90,5 +125,4 @@ export class MessageComponent implements OnInit, OnChanges {
             }
         }
     }
-
 }
