@@ -6,6 +6,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 export class SettingsService {
 
     public onReadableColorsChange = new EventEmitter<boolean>();
+    public onMessageTimestampChange = new EventEmitter<boolean>();
 
     constructor() { }
 
@@ -20,5 +21,18 @@ export class SettingsService {
             return true; // default value
         }
         return JSON.parse(readableColors);
+    }
+
+    public setMessageTimestamp(value: boolean){
+        localStorage.setItem("settings-message-timestamp", JSON.stringify(value));
+        this.onMessageTimestampChange.emit(value);
+    }
+
+    public getMessageTimestamp(): boolean{
+        const messageTimestamp = localStorage.getItem("settings-message-timestamp");
+        if(messageTimestamp === null){
+            return true; // default value
+        }
+        return JSON.parse(messageTimestamp);
     }
 }

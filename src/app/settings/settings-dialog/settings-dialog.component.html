@@ -5,7 +5,8 @@
             <mat-icon>close</mat-icon>
         </button>
     </div>
-    <div mat-dialog-content>
+    <div mat-dialog-content id="settings">
         <mat-checkbox [checked]="readableColors" (change)="onReadableColorsChange($event)">Readable Colors</mat-checkbox>
+        <mat-checkbox [checked]="messageTimestamp" (change)="onMessageTimestampChange($event)">Timestamp For Messages</mat-checkbox>
     </div>
 </div>

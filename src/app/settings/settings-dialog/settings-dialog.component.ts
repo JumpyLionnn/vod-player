@@ -11,13 +11,19 @@ import { SettingsService } from '../settings.service';
 export class SettingsDialogComponent {
 
     public readableColors: boolean;
+    public messageTimestamp: boolean;
 
     constructor(public dialogRef: MatDialogRef<SettingsDialogComponent>, protected settings: SettingsService){
         this.readableColors = settings.getReadableColors();
+        this.messageTimestamp = settings.getMessageTimestamp();
     }
 
 
-    onReadableColorsChange(change: MatCheckboxChange){
+    protected onReadableColorsChange(change: MatCheckboxChange){
         this.settings.setReadableColors(change.checked);
+    }
+
+    protected onMessageTimestampChange(change: MatCheckboxChange){
+        this.settings.setMessageTimestamp(change.checked);
     }
 }

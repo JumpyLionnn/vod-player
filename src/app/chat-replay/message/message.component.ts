@@ -43,18 +43,42 @@ export class MessageComponent implements OnInit, OnChanges {
     public color: Color = new Color([0, 0, 0], "rgb");
     public contentFragments: Fragment[] = [];
 
-    public FragmentTypeEnum = FragmentType;
+    protected FragmentTypeEnum = FragmentType;
+
+    protected showTimestamp: boolean = false;
+    protected timestamp: string = "";
 
     constructor(private settings: SettingsService) {
         this.settings.onReadableColorsChange.subscribe(this.changeReadableColors.bind(this));
+        this.settings.onMessageTimestampChange.subscribe(this.onMessageTimestampChange.bind(this));
     }
 
     ngOnInit(): void{
         this.changeReadableColors(this.settings.getReadableColors());
+        this.onMessageTimestampChange(this.settings.getMessageTimestamp());
     }
 
     ngOnChanges(){
         this.parse();
+    }
+
+    private onMessageTimestampChange(value: boolean){
+        this.showTimestamp = value;
+        if(value){
+            const totalSeconds = this.message.content_offset_seconds;
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds - hours * 3600) / 60);
+            const seconds = totalSeconds - (hours * 3600) - (minutes * 60);
+
+            let timestamp = "";
+            if(hours > 0){
+                timestamp += hours.toString() + ":";
+            }
+            timestamp += minutes.toString().padStart(2, "0") + ":";
+            timestamp += seconds.toString().padStart(2, "0");
+            
+            this.timestamp = timestamp;
+        }
     }
 
     private changeReadableColors(value: boolean){

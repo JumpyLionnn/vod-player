@@ -1,4 +1,7 @@
 <div id="message">
+    <span id="timestamp" *ngIf="showTimestamp">
+        {{timestamp}}
+    </span>
     <span id="user">
         <span id="badges">
             <app-badge *ngFor="let badgeInfo of message.message.user_badges" [id]="badgeInfo._id" [version]="badgeInfo.version"></app-badge>
