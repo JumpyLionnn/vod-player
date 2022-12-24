@@ -1,18 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
 
+@use "styles/video-player.scss";
+@use "styles/tooltips.scss";
+
+@use "@angular/material" as mat;
+
+@use "./styles/themes/light";
+@use "./styles/themes/dark";
+
+//@use "@angular/material/prebuilt-themes/indigo-pink.css" as default;
+
+
+@mixin use-theme($theme){
+    @include mat.core-color($theme);
+
+    @include mat.button-color($theme);
+    @include mat.icon-color($theme);
+    @include mat.tooltip-color($theme);
+    @include mat.dialog-color($theme);
+    @include mat.snack-bar-color($theme);
+    @include mat.input-color($theme);
+    @include mat.checkbox-color($theme);
+    @include mat.divider-color($theme);
+    @include mat.radio-color($theme);
+}
+
+@include mat.core();
+
 :root {
-    --background-color: black;
-    --text-color: white;
+    @include use-theme(light.$my-app-light-theme);
+    --text-color: mat-color($accent, default);
+
+    .dark-theme {
+        @include use-theme(dark.$my-app-dark-theme);
+
+        --text-color: mat-color($accent, default);
+    }
 }
 
 html,
 body {
     overflow: hidden;
     padding: 0;
-}
-
-body {
-    background-color: var(--background-color);
 }
 
 html,
@@ -23,102 +52,4 @@ body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-// tooltips
-.mat-tooltip {
-    pointer-events: none;
-
-    --margin: 0.3rem;
-
-    &::after {
-        width: 0;
-        height: 0;
-        content: '';
-        position: absolute;
-        border-left: 0.5rem solid transparent;
-        border-right: 0.5rem solid transparent;
-        border-bottom: 0.5rem solid var(--mdc-plain-tooltip-container-color);
-    }
-
-    &.below {
-        overflow: initial;
-        margin-top: var(--margin);
-
-        &:after {
-            top: -0.5rem;
-            right: calc(50% - 0.5rem);
-            transform: rotate(0);
-        }
-    }
-
-    &.above {
-        overflow: initial;
-        margin-bottom: var(--margin);
-
-        &:after {
-            bottom: -0.5rem;
-            right: calc(50% - 0.5rem);
-            transform: rotate(180deg);
-        }
-    }
-
-    &.right {
-        overflow: initial;
-        margin-left: var(--margin);
-
-        &:after {
-            left: -0.75rem;
-            top: calc(50% - 0.25rem);
-            transform: rotate(270deg);
-        }
-    }
-
-    &.left {
-        overflow: initial;
-        margin-right: var(--margin);
-
-        &:after {
-            right: -0.75rem;
-            top: calc(50% - 0.25rem);
-            transform: rotate(90deg);
-        }
-    }
-}
-
-// video player
-vg-player {
-    vg-scrub-bar {
-        
-        .scrubBar{
-            background-color: #50534e;
-        }
-
-        &:not(.hide):hover{
-            transition: height 0.2s ease-in;
-        }
-
-        &:hover{
-            
-            height: 12px;
-        }
-
-        vg-scrub-bar-current-time, vg-scrub-bar-buffering-time{
-            height: 100%;
-        }
-    }
-}
-
-vg-buffering .vg-buffering .bufferingContainer{
-    cursor: default;
-}
-
-.vg-overlay-play{
-    cursor: default!important;
-
-    .vg-icon-play_arrow::before{
-        z-index: 201;
-        cursor: pointer!important;
-        pointer-events: all;
-    }
 }

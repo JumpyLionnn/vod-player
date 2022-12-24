@@ -49,6 +49,7 @@ export class MessageComponent implements OnInit, OnChanges {
     protected timestamp: string = "";
 
     constructor(private settings: SettingsService) {
+        this.settings.onThemeChange.subscribe(this.changeReadableColors.bind(this));
         this.settings.onReadableColorsChange.subscribe(this.changeReadableColors.bind(this));
         this.settings.onMessageTimestampChange.subscribe(this.onMessageTimestampChange.bind(this));
     }
@@ -83,7 +84,7 @@ export class MessageComponent implements OnInit, OnChanges {
 
     private changeReadableColors(value: boolean){
         if(value){
-            const backgroundColor = new Color("black"); // make it dynamic with themes
+            const backgroundColor = getBackgroundColor();
             const fontColor = new Color(this.message.message.user_color);
 
             const contrastRatio = backgroundColor.contrast(fontColor);
@@ -92,7 +93,7 @@ export class MessageComponent implements OnInit, OnChanges {
                 const backgroundLight = backgroundColor.lightness();
                 const contrastDiff = minContrastRatio - contrastRatio;
                 
-                const change = contrastDiff * 5;
+                const change = contrastDiff * 7;
 
                 if(backgroundLight > 50){
                     this.color = fontColor.lightness(fontColor.lightness() - change);
@@ -149,4 +150,10 @@ export class MessageComponent implements OnInit, OnChanges {
             }
         }
     }
+}
+
+// this is a hack, but this is the best way and it works
+let bodyStyle = getComputedStyle(document.body);
+function getBackgroundColor(){
+    return new Color(bodyStyle.backgroundColor);
 }

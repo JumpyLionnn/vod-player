@@ -3,6 +3,7 @@ import { Broadcast } from './broadcast.model';
 import { ChatReplayComponent } from './chat-replay/chat-replay.component';
 import { DataLoaderService } from './data-loader.service';
 import { VideoPlayerComponent } from './video-player/video-player.component';
+import { SettingsService } from './settings/settings.service';
 
 @Component({
     selector: 'app-root',
@@ -19,7 +20,7 @@ export class AppComponent {
     @ViewChild("chatReplay", { static: true })
     public chatReplay!: ChatReplayComponent;
 
-    constructor(private loader: DataLoaderService) {
+    constructor(private loader: DataLoaderService, private settings: SettingsService) {
          loader.onLoad.subscribe((data) => {
             this.broadcastData = data;
             this.video.seekTo(data.startTime);

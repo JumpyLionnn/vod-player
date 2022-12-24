@@ -6,6 +6,11 @@
         </button>
     </div>
     <div mat-dialog-content id="settings">
+        <h3>Theme</h3>
+        <mat-radio-group [value]="currentTheme" (change)="onThemeChange($event)">
+            <mat-radio-button *ngFor="let theme of themes" [value]="theme.id">{{theme.name}}</mat-radio-button>
+        </mat-radio-group>
+        <h3>Chat appearance</h3>
         <mat-checkbox [checked]="readableColors" (change)="onReadableColorsChange($event)">Readable Colors</mat-checkbox>
         <mat-checkbox [checked]="messageTimestamp" (change)="onMessageTimestampChange($event)">Timestamp For Messages</mat-checkbox>
     </div>

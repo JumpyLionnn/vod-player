@@ -19,8 +19,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
+import {MatRadioModule} from '@angular/material/radio';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
@@ -55,7 +56,7 @@ const routes: Route[] = [
 		ShareDialogComponent,
 		TimeInputComponent,
 		FixedNumberInputComponent,
-  SettingsDialogComponent
+		SettingsDialogComponent
 	],
 	imports: [
 		BrowserModule,
@@ -72,6 +73,7 @@ const routes: Route[] = [
 		MatInputModule,
 		MatCheckboxModule,
 		MatDividerModule,
+		MatRadioModule,
 		ClipboardModule,
 
 		NgScrollbarModule,
