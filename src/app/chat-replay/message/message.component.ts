@@ -2,11 +2,13 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { Message } from '../../broadcast.model';
 import { SettingsService } from '../../settings/settings.service';
 import Color from "color";
+import { BetterttvEmoteService } from '../betterttv-emote.service';
 
 enum FragmentType{
     Text,
     Emote,
-    Link
+    Link,
+    BetterTTVEmote
 }
 
 interface TextFragment{
@@ -26,9 +28,16 @@ interface EmoteFragment{
     name: string;
 }
 
-type Fragment = TextFragment | EmoteFragment | LinkFragment;
+interface BetterTTVEmoteFragment{
+    type: FragmentType.BetterTTVEmote;
+    url: string;
+    name: string;
+}
+
+type Fragment = TextFragment | EmoteFragment | LinkFragment | BetterTTVEmoteFragment;
 
 const urlRegex = /(?<=\s|^)((https?:)?\/\/)?(www\.)?[-a-zA-Z0-9:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)(?=\s|$)/g;
+const whitespaceRegex = /(\s+)/;
 
 @Component({
     selector: 'app-message',
@@ -48,10 +57,11 @@ export class MessageComponent implements OnInit, OnChanges {
     protected showTimestamp: boolean = false;
     protected timestamp: string = "";
 
-    constructor(private settings: SettingsService) {
+    constructor(private settings: SettingsService, private betterTTVEmote: BetterttvEmoteService) {
         this.settings.onThemeChange.subscribe(this.changeReadableColors.bind(this));
         this.settings.onReadableColorsChange.subscribe(this.changeReadableColors.bind(this));
         this.settings.onMessageTimestampChange.subscribe(this.onMessageTimestampChange.bind(this));
+        this.betterTTVEmote.onLoad.subscribe(this.parse.bind(this));
     }
 
     ngOnInit(): void{
@@ -129,10 +139,7 @@ export class MessageComponent implements OnInit, OnChanges {
                     const length = match[0].length;
                     const index = match.index ?? 0;
                     if(index !== lastIndex){
-                        this.contentFragments.push({
-                            type: FragmentType.Text,
-                            text: fragment.text.slice(lastIndex, match.index)
-                        });
+                        this.contentFragments.push(...this.parseEmotes(fragment.text.slice(lastIndex, match.index)));
                     }
                     lastIndex = index + length;
                     this.contentFragments.push({
@@ -141,14 +148,49 @@ export class MessageComponent implements OnInit, OnChanges {
                     });
                 }
                 if(lastIndex < fragment.text.length){
-                    this.contentFragments.push({
-                        type: FragmentType.Text,
-                        text: fragment.text.slice(lastIndex)
-                    });
+                    this.contentFragments.push(...this.parseEmotes(fragment.text.slice(lastIndex)));
                 }
-                
             }
         }
+    }
+
+    private parseEmotes(str: string){
+        const tokens = str.split(whitespaceRegex);
+        const fragments: Fragment[] = [];
+        let lastIndex = 0;
+        let currentIndex = 0;
+        for (let i = 0; i < tokens.length; i++) {
+            const token = tokens[i];
+            const emote = this.betterTTVEmote.lookupEmote(token);
+            if(emote !== null){
+                console.log(str);
+                console.log("better ttv emote rendered", token, str.slice(lastIndex, currentIndex));
+                fragments.push({
+                    type: FragmentType.Text,
+                    text: str.slice(lastIndex, currentIndex)
+                });
+                
+                fragments.push({
+                    type: FragmentType.BetterTTVEmote,
+                    url: emote.url,
+                    name: emote.code
+                });
+
+                currentIndex += token.length;
+                lastIndex = currentIndex;
+            }
+            else{
+                currentIndex += token.length;
+            }
+
+        }
+        if(lastIndex < str.length){
+            fragments.push({
+                type: FragmentType.Text,
+                text: str.slice(lastIndex)
+            });
+        }
+        return fragments;
     }
 }
 

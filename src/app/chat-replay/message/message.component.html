@@ -24,6 +24,15 @@
                     matTooltipClass="mat-tooltip above"
                     matTooltipPosition="above"
                     >
+                <img
+                    *ngSwitchCase="FragmentTypeEnum.BetterTTVEmote" 
+                    [src]="$any(fragment).url" 
+                    class="emote"
+                    [matTooltip]="$any(fragment).name + '\nBetterTTV emote'"
+                    [matTooltipShowDelay]="100"
+                    matTooltipClass="mat-tooltip above"
+                    matTooltipPosition="above"
+                    >
             </ng-container>
         </ng-template>
     </span>
