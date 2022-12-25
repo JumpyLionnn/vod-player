@@ -1,4 +1,4 @@
-<a [href]="url" [ngClass]="{'disabled': url === null}" target="_blank">
+<a [href]="url" [ngClass]="{'disabled': url === null}" (click)="onLinkClicked($event)" target="_blank">
     <img 
     [matTooltip]="badge?.title ?? ''"
     [matTooltipShowDelay]="100"

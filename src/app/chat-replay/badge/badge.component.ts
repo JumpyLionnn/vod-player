@@ -35,4 +35,10 @@ export class BadgeComponent implements OnChanges {
             }
         }
     }
+
+    protected onLinkClicked(event: Event){
+        if(this.url === null){
+            event.preventDefault();
+        }
+    }
 }
