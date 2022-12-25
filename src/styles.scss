@@ -8,6 +8,8 @@
 @use "./styles/themes/light";
 @use "./styles/themes/dark";
 
+@use "./app/share-dialog/share-dialog.component.scss" as share;
+
 
 @mixin use-theme($theme){
     @include mat.core-color($theme);
@@ -21,6 +23,7 @@
     @include mat.checkbox-color($theme);
     @include mat.divider-color($theme);
     @include mat.radio-color($theme);
+    @include share.url-color($theme);
 }
 
 @include mat.core();
