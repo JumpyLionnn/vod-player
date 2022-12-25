@@ -34,7 +34,7 @@ export class SettingsService {
     public getTheme(): string{
         const theme = localStorage.getItem("settings-theme");
         if(theme === null){
-            return "light"; // default value
+            return isDarkModePrefered() ? "dark" : "light"; // default value
         }
         return JSON.parse(theme);
     }
@@ -64,4 +64,8 @@ export class SettingsService {
         }
         return JSON.parse(messageTimestamp);
     }
+}
+
+function isDarkModePrefered(){
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 }
