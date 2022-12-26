@@ -163,8 +163,6 @@ export class MessageComponent implements OnInit, OnChanges {
             const token = tokens[i];
             const emote = this.betterTTVEmote.lookupEmote(token);
             if(emote !== null){
-                console.log(str);
-                console.log("better ttv emote rendered", token, str.slice(lastIndex, currentIndex));
                 fragments.push({
                     type: FragmentType.Text,
                     text: str.slice(lastIndex, currentIndex)

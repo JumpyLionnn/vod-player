@@ -8,8 +8,8 @@
     </vg-scrub-bar>
 
     <vg-controls [vgAutohide]="true">
-        <vg-play-pause></vg-play-pause>
-        <vg-playback-button [playbackValues]="[ '0.5', '1.0', '1.5', '2.0', '4.0' ]"></vg-playback-button>
+        <vg-play-pause matTooltip="Toggle play (k)"></vg-play-pause>
+        <vg-playback-button matTooltip="Change playback speed" [playbackValues]="[ '0.5', '1.0', '1.5', '2.0', '4.0' ]"></vg-playback-button>
 
         <span id="time-display">
             <vg-time-display vgProperty="current" vgFormat="hh:mm:ss"></vg-time-display>
@@ -19,11 +19,11 @@
 
         <span class="filler"></span>
 
-        <vg-mute></vg-mute>
+        <vg-mute matTooltip="Toggle mute (m)"></vg-mute>
         <vg-volume></vg-volume>
         
-        <app-picture-in-picture [video]="media" class="mobile-hidden"></app-picture-in-picture>
-        <vg-fullscreen></vg-fullscreen>
+        <app-picture-in-picture matTooltip="Picture in Picture" [video]="media" class="mobile-hidden"></app-picture-in-picture>
+        <vg-fullscreen matTooltip="Toggle fullscreen (f)"></vg-fullscreen>
         
     </vg-controls>
 
