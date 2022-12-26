@@ -1,7 +1,8 @@
 import { ViewChild, ElementRef } from '@angular/core';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { VgControlsComponent } from '@videogular/ngx-videogular/controls';
+import { VgControlsComponent, VgMuteComponent } from '@videogular/ngx-videogular/controls';
 import { VgApiService } from '@videogular/ngx-videogular/core';
+import { DialogService } from '../dialog.service';
 
 @Component({
     selector: 'app-video-player',
@@ -25,9 +26,12 @@ export class VideoPlayerComponent implements OnInit {
     @ViewChild(VgControlsComponent)
     public controls!: VgControlsComponent;
 
+    @ViewChild(VgMuteComponent)
+    public muteButton!: VgMuteComponent;
+
     private videoApi!: VgApiService;
 
-    constructor() {
+    constructor(private dialog: DialogService) {
         document.addEventListener("keydown", (e) => this.onKeyDown(e));
     }
 
@@ -62,6 +66,17 @@ export class VideoPlayerComponent implements OnInit {
 
 
     protected onKeyDown(event: KeyboardEvent) {
+        const element = <HTMLElement>event.target;
+        if(element.tagName === "INPUT"){
+            return;
+        }
+        const slection = getSelection();
+        if(slection !== null && !slection.isCollapsed){
+            return;
+        }
+        if(this.dialog.areAnyDialogsOpen()){
+            return;
+        }
         switch (event.code) {
             case "Space":
             case "KeyK":
@@ -82,7 +97,14 @@ export class VideoPlayerComponent implements OnInit {
             case "KeyF":
                 this.toggleFullscreen();
                 break;
+            case "KeyM":
+                this.toggleMute();
+                break;
         }
+    }
+
+    private toggleMute(){
+        this.muteButton.changeMuteState();
     }
 
     private toggleFullscreen() {

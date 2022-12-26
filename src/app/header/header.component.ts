@@ -1,9 +1,9 @@
 import { Input } from '@angular/core';
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { DataLoaderService } from '../data-loader.service';
 import { ShareDialogComponent, ShareDialogData } from '../share-dialog/share-dialog.component';
 import { SettingsDialogComponent } from '../settings/settings-dialog/settings-dialog.component';
+import { DialogService } from '../dialog.service';
 
 @Component({
     selector: 'app-header',
@@ -20,7 +20,7 @@ export class HeaderComponent {
     @Input()
     public duration: number = 0;
 
-    constructor(private loader: DataLoaderService, public dialog: MatDialog){
+    constructor(private loader: DataLoaderService, public dialog: DialogService){
         if(loader.isLoaded){
             this.title = loader.broadcastData.title ?? "Untitled stream.";
         }
