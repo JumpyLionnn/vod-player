@@ -1,6 +1,6 @@
 <div id="chat-panel">
     <h2 id="title">Chat Replay</h2>
-    <div id="chat">
+    <div id="chat" *ngIf="isChatAvailable">
         <ng-scrollbar id="messages-scrollable-container" [autoHeightDisabled]="false">
             <div #messagescontainer id="messages">
                 <ng-template ngFor let-message [ngForOf]="messages" let-i="index">
@@ -13,5 +13,8 @@
             <span>See new messages</span>
             <span></span>
         </button>
+    </div>
+    <div id="chat" *ngIf="!isChatAvailable">
+        <h3>Unavailable</h3>
     </div>
 </div>

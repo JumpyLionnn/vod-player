@@ -27,6 +27,7 @@
         
     </vg-controls>
 
-    <video [vgMedia]="$any(media)" #media id="singleVideo" [src]="src"  preload="auto" crossorigin autoplay (timeupdate)="updateTime()" (loadedmetadata)="onLoadedMetaData()">
+    <video [vgMedia]="$any(media)" #media id="singleVideo" [src]="src" preload="auto" crossorigin autoplay (timeupdate)="updateTime()" (loadedmetadata)="onLoadedMetaData()" [ngClass]="{'video-unavailable': src === null}">
     </video> 
+    <h3 *ngIf="src === null">Video unavailable</h3>
 </vg-player>

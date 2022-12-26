@@ -3,6 +3,12 @@ video{
     height: 100%;
 }
 
+.video-unavailable{
+    width: 0;
+    height: 0;
+    display: none;
+}
+
 #time-display{
     display: flex;
 }

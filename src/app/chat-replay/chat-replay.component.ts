@@ -12,6 +12,9 @@ export class ChatReplayComponent implements OnInit {
     @Input()
     public messages: Message[] = [];
 
+    @Input()
+    public isChatAvailable: boolean = false;
+
     public currentTime: number = 0;
 
     public showScrollDownButton: boolean = false;
@@ -31,10 +34,14 @@ export class ChatReplayComponent implements OnInit {
     }
 
     public ngAfterViewInit() {
-        this.scrollbarRef.scrolled.subscribe((e) => this.onScroll(e));
+        if(this.isChatAvailable)
+            this.scrollbarRef.scrolled.subscribe((e) => this.onScroll(e));
     }
 
     public updateVideoTime(time: number){
+        if(!this.isChatAvailable)
+            return;
+
         this.currentTime = time;
         if(!this.showScrollDownButton){
             this.changeDetector.detectChanges();
@@ -51,7 +58,8 @@ export class ChatReplayComponent implements OnInit {
 
 
     public scrollDown(){
-        this.scrollbarRef.scrollTo({bottom: 0});
+        if(this.isChatAvailable)
+            this.scrollbarRef.scrollTo({bottom: 0});
     }
 
     private onScroll(event: Event){

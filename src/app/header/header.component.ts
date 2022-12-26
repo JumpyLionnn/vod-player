@@ -20,7 +20,7 @@ export class HeaderComponent {
     @Input()
     public duration: number = 0;
 
-    constructor(private loader: DataLoaderService, public dialog: DialogService){
+    constructor(protected loader: DataLoaderService, public dialog: DialogService){
         if(loader.isLoaded){
             this.title = loader.broadcastData.title ?? "Untitled stream.";
         }
@@ -36,7 +36,7 @@ export class HeaderComponent {
             data: {
                 currentTime: this.currentTime,
                 duration: this.duration,
-                videoUrl: this.loader.broadcastData.videoUrl,
+                videoUrl: this.loader.broadcastData.videoUrl ?? "",
                 dataUrl: this.loader.dataUrl,
                 username: this.loader.broadcastData.username,
                 title: this.loader.broadcastData.title

@@ -29,11 +29,17 @@ export class BadgeComponent implements OnChanges {
         if(this.badge !== null){
             if(this.badge.click_action === "visit_url"){
                 this.url = this.badge.click_url;
+                return;
             }
             if(this.badge.click_action === "subscribe_to_channel"){
-                this.url = `https://www.twitch.tv/subs/${this.loader.broadcastData.username.toLowerCase()}`;
+                if(this.loader.broadcastData.username !== null){
+                    this.url = `https://www.twitch.tv/subs/${this.loader.broadcastData.username.toLowerCase()}`;
+                    return;
+                }
             }
         }
+        this.url = null;
+
     }
 
     protected onLinkClicked(event: Event){

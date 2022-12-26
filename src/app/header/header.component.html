@@ -1,7 +1,7 @@
 <div id="header">
     <h1>{{title}}</h1>
     <div id="buttons">
-        <button mat-icon-button (click)="share()" class="button">
+        <button mat-icon-button (click)="share()" class="button" *ngIf="loader.broadcastData.videoUrl !== null">
             <mat-icon>share</mat-icon>
         </button>
         <button mat-icon-button (click)="openSettings()" class="button">

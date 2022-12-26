@@ -1,6 +1,6 @@
 <div id="main">
     <app-header id="header" #header></app-header>
-    <app-video-player #video id="video" [src]="broadcastData?.videoUrl ?? ''"
+    <app-video-player #video id="video" [src]="broadcastData?.videoUrl ?? null"
         (timeupdate)="chatReplay.updateVideoTime($event);header.currentTime=$event" (duration)="header.duration=$event"></app-video-player>
-    <app-chat-replay id="chat" #chatReplay [messages]="broadcastData?.messages ?? []"></app-chat-replay>
+    <app-chat-replay id="chat" #chatReplay [messages]="broadcastData?.messages ?? []" [isChatAvailable]="broadcastData?.messages !== null"></app-chat-replay>
 </div>

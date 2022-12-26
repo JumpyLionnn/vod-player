@@ -12,7 +12,7 @@ import { DialogService } from '../dialog.service';
 export class VideoPlayerComponent implements OnInit {
 
     @Input()
-    public src: string = "";
+    public src: string | null = null;
 
     @Output("timeupdate")
     public timeChangedEvent: EventEmitter<number> = new EventEmitter();

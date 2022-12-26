@@ -12,7 +12,7 @@ export interface ShareDialogData{
     videoUrl: string;
     dataUrl: string;
     title: string | null;
-    username: string;
+    username: string | null;
 }
 
 @Component({
@@ -62,6 +62,10 @@ export class ShareDialogComponent implements AfterViewInit {
             this.url += `&t=${this.time}`;
         }
 
-        this.shareDescription = `${this.data.title ?? "Twitch VOD"} by ${this.data.username}.`;
+        this.shareDescription = `${this.data.title ?? "Twitch VOD"}`;
+        if(this.data.username !== null){
+            this.shareDescription += `by ${this.data.username}`;
+        }
+        this.shareDescription += ".";
     }
 }
