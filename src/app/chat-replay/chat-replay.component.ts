@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { Message } from "../broadcast.model";
 
@@ -34,8 +34,16 @@ export class ChatReplayComponent implements OnInit {
     }
 
     public ngAfterViewInit() {
-        if(this.isChatAvailable)
+        if(this.isChatAvailable) {
             this.scrollbarRef.scrolled.subscribe((e) => this.onScroll(e));
+        }
+    }
+
+    ngOnChanges(changes: SimpleChanges): void{
+        if(changes["isChatAvailable"].previousValue === false && changes["isChatAvailable"].currentValue === true){
+            this.changeDetector.detectChanges();
+            this.scrollbarRef.scrolled.subscribe((e) => this.onScroll(e));
+        }
     }
 
     public updateVideoTime(time: number){
@@ -65,6 +73,7 @@ export class ChatReplayComponent implements OnInit {
     private onScroll(event: Event){
         const element = (<HTMLElement>event.target);
         const margin = element.scrollHeight - element.clientHeight - element.scrollTop;
+        console.log(margin);
         if(margin >= this.scrollTreshold){
             this.showScrollDownButton = true;
         }
